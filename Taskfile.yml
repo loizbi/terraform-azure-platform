@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+includes:
+  aws: 
+    taskfile: ../taskfiles/aws.yml
+    optional: true
+  git: 
+    taskfile: ../taskfiles/git.yml
+    optional: true
+  tools: 
+    taskfile: ../taskfiles/tools.yml
+    optional: true
+  kubernetes: 
+    taskfile: ../taskfiles/kubernetes.yml
+    optional: true
+
+tasks:
+  default:
+    internal: false
+    desc: Terraform Tasks
+    cmds:
+      - task --list-all --sort none
