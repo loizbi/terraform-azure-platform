@@ -3,17 +3,20 @@
 version: '3'
 
 includes:
-  aws: 
-    taskfile: ../taskfiles/aws.yml
-    optional: true
   git: 
     taskfile: ../taskfiles/git.yml
     optional: true
-  tools: 
-    taskfile: ../taskfiles/tools.yml
+  aws: 
+    taskfile: ../taskfiles/aws.yml
+    optional: true
+  azure: 
+    taskfile: ../taskfiles/azure.yml
     optional: true
   kubernetes: 
     taskfile: ../taskfiles/kubernetes.yml
+    optional: true
+  tools: 
+    taskfile: ../taskfiles/tools.yml
     optional: true
 
 tasks:
