@@ -5,7 +5,7 @@ data "azurerm_ssh_public_key" "ssh_key" {
   resource_group_name = var.ssh_public_key_rg
 }
 
-# Retrieve existing SSH public key from Azure
+# Retrieve existing DNS zone from Azure
 data "azurerm_dns_zone" "dns_zone" {
   name                = "${var.environment}.${var.domain}"
   resource_group_name = var.domain_rg
@@ -14,6 +14,11 @@ data "azurerm_dns_zone" "dns_zone" {
 resource "azurerm_resource_group" "vms_rg" {
   name     = "${var.project}-${var.environment}-${var.location}-rg"
   location = var.location
+
+  # Merging common tags with resource-specific tags
+  tags = merge(local.common_tags, {
+    Project = var.project
+  })
 }
 
 resource "azurerm_virtual_network" "vms_vnet" {
