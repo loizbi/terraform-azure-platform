@@ -1,5 +1,6 @@
 # Global Vars
 region      = "eastus"
+team        = "devops"
 environment = "dev"
 
 # Resource Specific

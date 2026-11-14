@@ -1,7 +1,7 @@
 locals {
   common_tags = {
-    Team        = "devops"
-    Environment = "dev"
+    Team        = var.team
+    Environment = var.environment
     ManagedBy   = "terraform"
   }
 }
