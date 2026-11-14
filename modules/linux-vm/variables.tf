@@ -9,6 +9,11 @@ variable "environment" {
   type        = string
 }
 
+variable "team" {
+  description = "Team Name"
+  type        = string
+}
+
 variable "domain" {
   description = "Domain name for the project"
   type        = string
@@ -37,6 +42,11 @@ variable "vnet_name" {
 variable "subnet_name" {
   description = "Name"
   type        = string
+}
+
+variable "image_reference" {
+  description = "Name"
+  type        = list(string)
 }
 
 variable "vm_type" {

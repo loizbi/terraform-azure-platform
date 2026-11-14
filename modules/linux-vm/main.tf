@@ -76,10 +76,10 @@ resource "azurerm_virtual_machine" "vms_vm" {
   delete_os_disk_on_termination = true
 
   storage_image_reference {
-    publisher = "Canonical"
-    offer     = "ubuntu-24_04-lts"
-    sku       = "server"
-    version   = "latest"
+    publisher = var.image_reference[0]
+    offer     = var.image_reference[1]
+    sku       = var.image_reference[2]
+    version   = var.image_reference[3]
   }
 
   storage_os_disk {
@@ -102,6 +102,11 @@ resource "azurerm_virtual_machine" "vms_vm" {
       key_data = data.azurerm_ssh_public_key.ssh_key.public_key
     }
   }
+
+  lifecycle {
+    prevent_destroy = false
+  }
+
 }
 
 resource "azurerm_network_security_group" "vms_nsg" {
