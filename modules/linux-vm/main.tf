@@ -42,7 +42,7 @@ resource "azurerm_network_interface" "vms_nic" {
 
   ip_configuration {
     name                          = "ip-${count.index + 1}"
-    subnet_id                     = data.azurerm_virtual_network.vnet.id
+    subnet_id                     = data.azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
 
     public_ip_address_id = azurerm_public_ip.vms_public_ip[count.index].id
@@ -83,7 +83,7 @@ resource "azurerm_virtual_machine" "vms_vm" {
   }
 
   storage_os_disk {
-    name              = "os-disk-${count.index + 1}"
+    name              = "os-disk-${var.vm_name}-${count.index + 1}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
