@@ -12,12 +12,12 @@ output "vms_names" {
 
 output "vnet_name" {
   description = "Name of the virtual network"
-  value       = azurerm_virtual_network.vms_vnet.name
+  value       = var.vnet_name
 }
 
 output "subnet_name" {
   description = "Name of the virtual machine subnet"
-  value       = azurerm_subnet.vms_internal.name
+  value       = var.subnet_name
 }
 
 output "vms_nics_names" {

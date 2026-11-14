@@ -24,6 +24,21 @@ variable "project" {
   type        = string
 }
 
+variable "vnet_rg" {
+  description = "Name"
+  type        = string
+}
+
+variable "vnet_name" {
+  description = "Name"
+  type        = string
+}
+
+variable "subnet_name" {
+  description = "Name"
+  type        = string
+}
+
 variable "vm_type" {
   description = "Type of the virtual machine"
   type        = string
