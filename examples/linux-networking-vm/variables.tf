@@ -31,9 +31,6 @@ variable "subnet_address_prefix" {
   type        = string
 }
 
-
-
-
 # Linux vm module variables
 variable "domain" {
   description = "Domain name for the project"
@@ -45,19 +42,26 @@ variable "domain_rg" {
   type        = string
 }
 
+# Optional networking inputs
+# Used when deploying the Linux VM module independently
+# Defaults to null when networking is provided by the networking module
+
 variable "vnet_rg" {
   description = "Name"
   type        = string
+  default     = "null"
 }
 
 variable "vnet_name" {
   description = "Name"
   type        = string
+  default     = "null"
 }
 
 variable "subnet_name" {
   description = "Name"
   type        = string
+  default     = "null"
 }
 
 variable "image_reference" {

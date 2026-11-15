@@ -13,10 +13,6 @@ subnet_address_prefix = "10.0.1.0/24"
 domain    = "loizbi-example.com"
 domain_rg = "admin-ssh-keys"
 
-#vnet_rg     = "vms-example-01-dev-eastus-rg"
-#vnet_name   = "vms-example-01-dev-eastus-vnet"
-#subnet_name = "vms-example-01-dev-eastus-subnet"
-
 image_reference = [
   "Canonical",
   "ubuntu-24_04-lts",
