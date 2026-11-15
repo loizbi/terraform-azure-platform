@@ -1,7 +1,7 @@
 
 # Use the networking module
 module "networking" {
-  source = "git::https://github.com/loizbi/terraform-azure-platform.git//modules/networking?ref=4abc309ad9e75886a9d1192b04afe65b35d85cee"
+  source = "git::https://github.com/loizbi/terraform-azure-platform.git//modules/networking?ref=validation"
 
   ## Pass variables to the module
 
@@ -18,7 +18,7 @@ module "networking" {
 
 # Use the linux vm module
 module "linux_vm" {
-  source = "git::https://github.com/loizbi/terraform-azure-platform.git//modules/linux-vm?ref=4abc309ad9e75886a9d1192b04afe65b35d85cee"
+  source = "git::https://github.com/loizbi/terraform-azure-platform.git//modules/linux-vm?ref=validation"
 
   ## Pass variables to the module
 
