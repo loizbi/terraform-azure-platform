@@ -1,5 +1,5 @@
 
-output "resource_group_name" {
+output "vnet_rg" {
   value = azurerm_resource_group.vnet_rg.name
 }
 
