@@ -23,7 +23,7 @@ data "azurerm_dns_zone" "dns_zone" {
   resource_group_name = var.domain_rg
 }
 
-resource "azurerm_resource_group" "vms_rg" {
+resource "azurerm_resource_group" "vm_rg" {
   name     = "${var.project}-${var.environment}-${var.location}-rg"
   location = var.location
 
@@ -37,8 +37,8 @@ resource "azurerm_network_interface" "vms_nic" {
   count = var.vm_count
 
   name                = "${var.project}-${var.environment}-${var.location}-nic-${count.index + 1}"
-  location            = azurerm_resource_group.vms_rg.location
-  resource_group_name = azurerm_resource_group.vms_rg.name
+  location            = azurerm_resource_group.vm_rg.location
+  resource_group_name = azurerm_resource_group.vm_rg.name
 
   ip_configuration {
     name                          = "ip-${count.index + 1}"
@@ -53,8 +53,8 @@ resource "azurerm_public_ip" "vms_public_ip" {
   count = var.vm_count
 
   name                = "${var.project}-${var.environment}-${var.location}-pip-${count.index + 1}"
-  resource_group_name = azurerm_resource_group.vms_rg.name
-  location            = azurerm_resource_group.vms_rg.location
+  resource_group_name = azurerm_resource_group.vm_rg.name
+  location            = azurerm_resource_group.vm_rg.location
 
   allocation_method = "Static"
   sku               = "Standard"
@@ -66,8 +66,8 @@ resource "azurerm_virtual_machine" "vms_vm" {
   count = var.vm_count
 
   name                  = "${var.vm_name}-${count.index + 1}"
-  location              = azurerm_resource_group.vms_rg.location
-  resource_group_name   = azurerm_resource_group.vms_rg.name
+  location              = azurerm_resource_group.vm_rg.location
+  resource_group_name   = azurerm_resource_group.vm_rg.name
   network_interface_ids = [azurerm_network_interface.vms_nic[count.index].id]
   vm_size               = var.vm_type
 
@@ -111,8 +111,8 @@ resource "azurerm_virtual_machine" "vms_vm" {
 
 resource "azurerm_network_security_group" "vms_nsg" {
   name                = "${var.project}-${var.environment}-nsg"
-  location            = azurerm_resource_group.vms_rg.location
-  resource_group_name = azurerm_resource_group.vms_rg.name
+  location            = azurerm_resource_group.vm_rg.location
+  resource_group_name = azurerm_resource_group.vm_rg.name
 
   security_rule {
     name                       = "Allow-SSH"
