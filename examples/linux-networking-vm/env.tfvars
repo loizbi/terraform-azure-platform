@@ -1,17 +1,17 @@
 
-# Environment-specific variables
+# Common variables
 location    = "eastus"
 team        = "devops"
 environment = "dev"
-domain      = "loizbi-example.com"
-domain_rg   = "admin-ssh-keys"
+project     = "example-01"
 
-# Resource-specific variables
-project = "docker-swarm"
+# Networking module
+vnet_address_space    = "10.0.0.0/16"
+subnet_address_prefix = "10.0.1.0/24"
 
-vnet_rg     = "vms-example-01-dev-eastus-rg"
-vnet_name   = "vms-example-01-dev-eastus-vnet"
-subnet_name = "vms-example-01-dev-eastus-subnet"
+# Linux vm module
+domain    = "loizbi-example.com"
+domain_rg = "admin-ssh-keys"
 
 image_reference = [
   "Canonical",

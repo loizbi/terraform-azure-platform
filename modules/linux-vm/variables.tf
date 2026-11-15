@@ -29,19 +29,10 @@ variable "project" {
   type        = string
 }
 
-variable "vnet_rg" {
+variable "subnet_id" {
   description = "Name"
   type        = string
-}
-
-variable "vnet_name" {
-  description = "Name"
-  type        = string
-}
-
-variable "subnet_name" {
-  description = "Name"
-  type        = string
+  default     = null
 }
 
 variable "image_reference" {

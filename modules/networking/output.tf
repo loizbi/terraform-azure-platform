@@ -15,6 +15,10 @@ output "subnet_name" {
   value = azurerm_subnet.internal.name
 }
 
+output "subnet_id" {
+  value = azurerm_subnet.internal.id
+}
+
 output "subnet_address_prefix" {
   value = var.subnet_address_prefix
 }

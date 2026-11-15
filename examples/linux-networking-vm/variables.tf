@@ -31,9 +31,6 @@ variable "subnet_address_prefix" {
   type        = string
 }
 
-
-
-
 # Linux vm module variables
 variable "domain" {
   description = "Domain name for the project"
@@ -45,19 +42,10 @@ variable "domain_rg" {
   type        = string
 }
 
-variable "vnet_rg" {
+variable "subnet_id" {
   description = "Name"
   type        = string
-}
-
-variable "vnet_name" {
-  description = "Name"
-  type        = string
-}
-
-variable "subnet_name" {
-  description = "Name"
-  type        = string
+  default     = "null"
 }
 
 variable "image_reference" {
