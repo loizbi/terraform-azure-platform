@@ -25,7 +25,6 @@ output "subnet_address_prefix" {
 }
 
 # Linux VM module
-
 output "vm_rg" {
   description = "Virtual machine resource group name"
   value       = module.linux_vm.vm_rg
