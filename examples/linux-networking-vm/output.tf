@@ -16,6 +16,10 @@ output "subnet_name" {
   value = module.networking.subnet_name
 }
 
+output "subnet_id" {
+  value = module.networking.subnet_id
+}
+
 output "subnet_address_prefix" {
   value = var.subnet_address_prefix
 }
@@ -31,16 +35,6 @@ output "vm_name" {
   description = "Names of the virtual machines"
   value       = module.linux_vm.vm_name
 }
-
-#output "vnet_name" {
-#  description = "Name of the virtual network"
-#  value       = var.vnet_name
-#}
-
-#output "subnet_name" {
-#  description = "Name of the virtual machine subnet"
-#  value       = var.subnet_name
-#}
 
 output "vm_nic_name" {
   description = "Names of the VM network interfaces"

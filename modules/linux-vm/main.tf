@@ -1,16 +1,4 @@
 
-# Retrieve existing DNS zone from Azure
-data "azurerm_virtual_network" "vnet" {
-  name                = var.vnet_name
-  resource_group_name = var.vnet_rg
-}
-
-data "azurerm_subnet" "subnet" {
-  name                 = var.subnet_name
-  virtual_network_name = var.vnet_name
-  resource_group_name  = var.vnet_rg
-}
-
 # Retrieve existing SSH public key from Azure
 data "azurerm_ssh_public_key" "ssh_key" {
   name                = var.ssh_public_key_name
@@ -33,7 +21,7 @@ resource "azurerm_resource_group" "vm_rg" {
   })
 }
 
-resource "azurerm_network_interface" "vms_nic" {
+resource "azurerm_network_interface" "vm_nic" {
   count = var.vm_count
 
   name                = "${var.project}-${var.environment}-${var.location}-nic-${count.index + 1}"
@@ -42,14 +30,14 @@ resource "azurerm_network_interface" "vms_nic" {
 
   ip_configuration {
     name                          = "ip-${count.index + 1}"
-    subnet_id                     = data.azurerm_subnet.subnet.id
+    subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
 
-    public_ip_address_id = azurerm_public_ip.vms_public_ip[count.index].id
+    public_ip_address_id = azurerm_public_ip.vm_public_ip[count.index].id
   }
 }
 
-resource "azurerm_public_ip" "vms_public_ip" {
+resource "azurerm_public_ip" "vm_public_ip" {
   count = var.vm_count
 
   name                = "${var.project}-${var.environment}-${var.location}-pip-${count.index + 1}"
@@ -62,13 +50,13 @@ resource "azurerm_public_ip" "vms_public_ip" {
   zones = [tostring((count.index % 3) + 1)]
 }
 
-resource "azurerm_virtual_machine" "vms_vm" {
+resource "azurerm_virtual_machine" "vm" {
   count = var.vm_count
 
   name                  = "${var.vm_name}-${count.index + 1}"
   location              = azurerm_resource_group.vm_rg.location
   resource_group_name   = azurerm_resource_group.vm_rg.name
-  network_interface_ids = [azurerm_network_interface.vms_nic[count.index].id]
+  network_interface_ids = [azurerm_network_interface.vm_nic[count.index].id]
   vm_size               = var.vm_type
 
   zones = [tostring((count.index % 3) + 1)]
@@ -109,7 +97,7 @@ resource "azurerm_virtual_machine" "vms_vm" {
 
 }
 
-resource "azurerm_network_security_group" "vms_nsg" {
+resource "azurerm_network_security_group" "vm_nsg" {
   name                = "${var.project}-${var.environment}-nsg"
   location            = azurerm_resource_group.vm_rg.location
   resource_group_name = azurerm_resource_group.vm_rg.name
@@ -139,17 +127,17 @@ resource "azurerm_network_security_group" "vms_nsg" {
   }
 }
 
-resource "azurerm_subnet_network_security_group_association" "vms_nsg_association" {
-  subnet_id                 = data.azurerm_subnet.subnet.id
-  network_security_group_id = azurerm_network_security_group.vms_nsg.id
+resource "azurerm_subnet_network_security_group_association" "vm_nsg_association" {
+  subnet_id                 = var.subnet_id
+  network_security_group_id = azurerm_network_security_group.vm_nsg.id
 }
 
-resource "azurerm_dns_a_record" "vms_dns_record" {
+resource "azurerm_dns_a_record" "vm_dns_record" {
   count = var.vm_count
 
   name                = "${var.vm_name}-${count.index + 1}"
   zone_name           = data.azurerm_dns_zone.dns_zone.name
   resource_group_name = var.domain_rg
   ttl                 = 300
-  target_resource_id  = azurerm_public_ip.vms_public_ip[count.index].id
+  target_resource_id  = azurerm_public_ip.vm_public_ip[count.index].id
 }

@@ -7,18 +7,18 @@ output "vm_rg" {
 
 output "vm_name" {
   description = "Names of the virtual machines"
-  value       = azurerm_virtual_machine.vm_vm[*].name
+  value       = azurerm_virtual_machine.vm[*].name
 }
 
-output "vnet_name" {
-  description = "Name of the virtual network"
-  value       = var.vnet_name
-}
+#output "vnet_name" {
+#  description = "Name of the virtual network"
+#  value       = var.vnet_name
+#}
 
-output "subnet_name" {
-  description = "Name of the virtual machine subnet"
-  value       = var.subnet_name
-}
+#output "subnet_name" {
+#  description = "Name of the virtual machine subnet"
+#  value       = var.subnet_name
+#}
 
 output "vm_nic_name" {
   description = "Names of the VM network interfaces"
