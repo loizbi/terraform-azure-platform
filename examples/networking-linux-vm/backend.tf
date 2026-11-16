@@ -4,6 +4,6 @@ terraform {
     resource_group_name  = "example-bootstraps-dev-eastus-rg"
     storage_account_name = "examplebsdeveastusst"
     container_name       = "terraform-state-files"
-    key                  = "bootstrap-example-01.tfstate"
+    key                  = "net-vm-example-01.tfstate"
   }
 }
