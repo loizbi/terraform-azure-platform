@@ -6,10 +6,10 @@ terraform {
   #############################################################
   backend "azurerm" {
       use_azuread_auth     = true                        
-      resource_group_name  = "example-bootstraps-dev-eastus-rg"
-      storage_account_name = "examplebsdeveastusst"
+      resource_group_name  = "example-01-terraform-dev-eastus-rg"
+      storage_account_name = "example01bsdeveastusst"
       container_name       = "terraform-state-files"
-      key                  = "bootstrap-backend.tfstate"  
+      key                  = "example-01-bootstrap-backend.tfstate"  
     }
 
   required_providers {
@@ -25,7 +25,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "tfstate" {
-  name     = "${var.project}-bootstraps-${var.environment}-${var.region}-rg"
+  name     = "${var.project}-terraform-${var.environment}-${var.region}-rg"
   location = var.region
 
   # Merging common tags with resource-specific tags
