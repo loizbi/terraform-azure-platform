@@ -25,6 +25,6 @@ vm_name             = "swarm-vm"
 ssh_public_key_name = "win_laptop_ed25519"
 ssh_public_key_rg   = "admin-ssh-keys"
 vm_username         = "the_admin"
-vm_count            = 2
+vm_count            = 1
 
 vm_allowed_ips = ["0.0.0.0/0"]
